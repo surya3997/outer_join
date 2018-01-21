@@ -4,14 +4,14 @@ try {
 
     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-	$mongo_id = new MongoDB\BSON\ObjectID("5a61cb6aaff8fb13000d46c2");
+	$mongo_id = new MongoDB\BSON\ObjectID("5a644a89aff8fb3ec74ede52");
 
     $query = new MongoDB\Driver\Query(["_id" => $mongo_id]); 
      
     $rows = $mng->executeQuery("testdb.cars", $query);
     $printer = array();
     foreach ($rows as $row) {
-    	array_push($printer, $row);
+    	var_dump($row);
     }
 
 	//die(json_encode($printer));

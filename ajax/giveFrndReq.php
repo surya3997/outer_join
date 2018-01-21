@@ -13,6 +13,10 @@
 
     $id = (string)$_POST['updateId'];
     $sender_id = (string)$_SESSION['id'];
+
+    if ($id === $sender_id) {
+        die("same user id");
+    }
     
     $mongo_id = new MongoDB\BSON\ObjectID($id);
     $mongo_send_id = new MongoDB\BSON\ObjectID($sender_id);

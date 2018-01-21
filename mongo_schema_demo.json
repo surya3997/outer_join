@@ -26,15 +26,15 @@
     // },
     "user_cover_pic": ["pic1.jpg", "pic2.jpg", "pic3.jpg"],
     "user_profile_pic": ["ppic1.jpg", "ppic2.jpg", "ppic3.jpg"],
-    "notification": [{
-        "notify_txt": "You have signed in",
-        "notify_time": "2017-10-03T16:30:00",
-        "seen": 1
-    }, {
-        "notify_txt": "Guru accepted your friend request",
-        "notify_time": "2017-10-03T17:30:00",
-        "seen": 0
-    }],
+    // "notification": [{
+    //     "notify_txt": "You have signed in",
+    //     "notify_time": "2017-10-03T16:30:00",
+    //     "seen": 1
+    // }, {
+    //     "notify_txt": "Guru accepted your friend request",
+    //     "notify_time": "2017-10-03T17:30:00",
+    //     "seen": 0
+    // }],
     // "user_status": 1,
     "user_post": [{
         "post_txt": "This is my first post!",
@@ -43,16 +43,18 @@
         "visibility": "friends",
         "likes": ["Other user_id1", "Other user_id2", "Other user_id3"],
         "comments": [{
+            "commenter_name": "user_name",
             "commenter": "user_id",
             "comment_txt": "nice",
             "time": "2017-10-03T17:30:00"
         }, {
             "commenter": "user_id2",
+            "commenter_name": "user_name",
             "comment_txt": "great",
             "time": "2017-10-03T17:35:00"
         }]
     }],
-    "friends": [{"mongodb_object_id1": "friend"}, {"mongodb_object_id2": "waiting for approval"}, {"mongodb_object_id2": "gave request"}],
+    // "friends": [{"mongodb_object_id1": "friend"}, {"mongodb_object_id2": "waiting for approval"}, {"mongodb_object_id2": "gave request"}],
     "feedback": [{
         "feedback_txt": "Nice work to crete this!",
         "star": 5,
