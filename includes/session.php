@@ -1,21 +1,14 @@
 <?php
-
 session_start();
 
-function db_query($findArray) {
+function db_query($findArray, $option) {
     try {
 
         $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-        $query = new MongoDB\Driver\Query($findArray); 
+        $query = new MongoDB\Driver\Query($findArray, $option); 
          
         $rows = $mng->executeQuery("testdb.cars", $query);
-        
-        // foreach ($rows as $row) {
-        //     echo '<pre>';
-        //     var_dump($row);
-        //     echo '</pre>';
-        // }
-        
+                
         return $rows;
 
     } catch (MongoDB\Driver\Exception\Exception $e) {
@@ -48,7 +41,19 @@ class Session {
     private $userId;
 
     public function __construct() {
-        $this->userId = NULL;
+        //echo $_SESSION['id'] == '';
+        if (isset($_SESSION['id']) && $_SESSION['id'] != '') {
+            $mongo_id = new MongoDB\BSON\ObjectID($_SESSION['id']);
+
+            $query = ["_id" => $mongo_id];
+            if (db_count($query)) {
+                $this->userId = $_SESSION['id'];
+            } else {
+                $this->userId = NULL;
+            }
+        } else {
+            $this->userId = NULL;
+        }
     }
     
     public function isLoggedIn() {
@@ -63,15 +68,30 @@ class Session {
             if (db_count(['email' => $userMail])) {
                 $hashedPassword = sha1($password);
     
-                if (db_count(['password' => $hashedPassword])) {
-                    $rows = db_query(['email' => $userMail, 'password' => $hashedPassword]);
+                if (db_count(['email' => $userMail, 'password' => $hashedPassword])) {
+                    $option = ["projection" => ['password' => 0, 'secret_quote' => 0, 'feedback' => 0, 'warning' => 0, 'group_chat' => 0]];
+                    $rows = db_query(['email' => $userMail, 'password' => $hashedPassword], $option);
 
+                    $printer = array();
                     foreach ($rows as $row) {
-                        echo '<pre>';
-                        var_dump($row);
-                        echo '</pre>';
+                        array_push($printer, $row);
                     }
-                    $this->userId = (string)$rows[0]->_id;
+
+                    $this->userId = (string)$printer[0]->_id;
+                    $_SESSION['id'] = (string)$printer[0]->_id;
+
+                    $bulk = new MongoDB\Driver\BulkWrite;
+                    $mongo_id = new MongoDB\BSON\ObjectID($_SESSION['id']);
+                    $bulk->update(
+                        ['_id' => $mongo_id],
+                        ['$set' => ['user_status' => 1]],
+                        ['multi' => false, 'upsert' => true]
+                    );
+
+                    $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
+                    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+
+                    die(json_encode($printer[0]));
                 } else {
                     echo "password invalid";
                 }
@@ -84,6 +104,19 @@ class Session {
 
 
     public function logout() {
+
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $mongo_id = new MongoDB\BSON\ObjectID($_SESSION['id']);
+        $bulk->update(
+            ['_id' => $mongo_id],
+            ['$set' => ['user_status' => 0]],
+            ['multi' => false, 'upsert' => true]
+        );
+
+        $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
+        $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+
+        $_SESSION['id'] = '';
         $this->userId = NULL;
     }
 

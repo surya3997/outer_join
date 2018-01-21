@@ -3,7 +3,10 @@
 try {
 
     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-    $query = new MongoDB\Driver\Query(["name" => "Guru"]); 
+
+	$mongo_id = new MongoDB\BSON\ObjectID("5a61cb6aaff8fb13000d46c2");
+
+    $query = new MongoDB\Driver\Query(["_id" => $mongo_id]); 
      
     $rows = $mng->executeQuery("testdb.cars", $query);
     $printer = array();
@@ -11,7 +14,7 @@ try {
     	array_push($printer, $row);
     }
 
-	//die(json_encode($printer[0]));
+	//die(json_encode($printer));
 	echo (string)$printer[0]->_id;
     
 } catch (MongoDB\Driver\Exception\Exception $e) {
