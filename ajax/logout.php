@@ -6,9 +6,14 @@
     $jsonMessage = array();
 
     if (!$session->isLoggedIn()) {
-        $jsonMessage['status'] = 'Illegal_entry';
+        $jsonMessage['status'] = "Error";
+        $jsonMessage['data'] = 'Illegal_entry';
         die(json_encode($jsonMessage));
     }
     $session->logout();
+
+    $jsonMessage['status'] = "Success";
+    $jsonMessage['data'] = 'Logged out';
+    die(json_encode($jsonMessage));
 
 ?>

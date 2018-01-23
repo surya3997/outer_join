@@ -36,34 +36,34 @@
     //     "seen": 0
     // }],
     // "user_status": 1,
-    "user_post": [{
-        "post_txt": "This is my first post!",
-        "post_pic": "post_pic1.png",
-        "post_time": "2017-10-03T17:40:00",
-        "visibility": "friends",
-        "likes": ["Other user_id1", "Other user_id2", "Other user_id3"],
-        "comments": [{
-            "commenter_name": "user_name",
-            "commenter": "user_id",
-            "comment_txt": "nice",
-            "time": "2017-10-03T17:30:00"
-        }, {
-            "commenter": "user_id2",
-            "commenter_name": "user_name",
-            "comment_txt": "great",
-            "time": "2017-10-03T17:35:00"
-        }]
-    }],
+    // "user_post": [{
+    //     "post_txt": "This is my first post!",
+    //     "post_pic": "post_pic1.png",
+    //     "post_time": "2017-10-03T17:40:00",
+    //     "visibility": "friends",
+    //     "likes": ["Other user_id1", "Other user_id2", "Other user_id3"],
+    //     "comments": [{
+    //         "commenter_name": "user_name",
+    //         "commenter": "user_id",
+    //         "comment_txt": "nice",
+    //         "time": "2017-10-03T17:30:00"
+    //     }, {
+    //         "commenter": "user_id2",
+    //         "commenter_name": "user_name",
+    //         "comment_txt": "great",
+    //         "time": "2017-10-03T17:35:00"
+    //     }]
+    // }],
     // "friends": [{"mongodb_object_id1": "friend"}, {"mongodb_object_id2": "waiting for approval"}, {"mongodb_object_id2": "gave request"}],
-    "feedback": [{
-        "feedback_txt": "Nice work to crete this!",
-        "star": 5,
-        "time": "2017-10-03T17:45:00"
-    }],
-    "warning": [{
-        "warning_txt": "You are about to be blocked",
-        "seen": 0
-    }],
+    // "feedback": [{
+    //     "feedback_txt": "Nice work to crete this!",
+    //     "star": 5,
+    //     "time": "2017-10-03T17:45:00"
+    // }],
+    // "warning": [{
+    //     "warning_txt": "You are about to be blocked",
+    //     "seen": 0
+    // }],
     "group_chat": [{
         "chat_text": "This is my first messsage!",
         "time": "2017-10-03T17:50:00"

@@ -62,8 +62,8 @@ class Session {
 
     public function login($userMail, $password) {
         if ($this->isLoggedIn()) {
-            echo "already logged in";
-            return false;
+            $response = ['status' => 'Error', 'data' => 'already logged in'];
+            return $response;
         } else {
             if (db_count(['email' => $userMail])) {
                 $hashedPassword = sha1($password);
@@ -91,12 +91,16 @@ class Session {
                     $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
                     $result = $manager->executeBulkWrite('testdb.cars', $bulk);
 
-                    die(json_encode($printer[0]));
+                    //die(json_encode($printer[0]));
+                    $response = ['status' => 'Success', 'data' => 'Loggin in'];
+                    return $response;
                 } else {
-                    echo "password invalid";
+                    $response = ['status' => 'Error', 'data' => 'Invalid password'];
+                    return $response;
                 }
             } else {
-                echo "username invalid!";
+                $response = ['status' => 'Error', 'data' => 'Invalid Username'];
+                return $response;
             }
 
         }

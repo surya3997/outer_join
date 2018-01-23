@@ -7,7 +7,8 @@
     $jsonMessage = array();
 
     if (!$session->isLoggedIn()) {
-        $jsonMessage['status'] = 'Illegal_entry';
+        $jsonMessage['status'] = 'Error';
+		$jsonMessage['data'] = 'Illegal Entry';
         die(json_encode($jsonMessage));
     }
 
@@ -21,6 +22,9 @@
         array_push($pushArray, $row);
     }
 
-    die(json_encode($pushArray));
+    $jsonMessage['status'] = 'Success';
+	$jsonMessage['data'] = $pushArray;
+
+    die(json_encode($jsonMessage));
 
 ?>

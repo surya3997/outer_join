@@ -7,6 +7,8 @@
     $email = $_POST['email'];
     $passwd = $_POST['password'];
 
-    $session->login($email, $passwd);
+    $response = $session->login($email, $passwd);
+
+    die(json_encode($response));
 
 ?>

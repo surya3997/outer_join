@@ -7,7 +7,8 @@
     $jsonMessage = array();
 
     if ($session->isLoggedIn()) {
-        $jsonMessage['status'] = 'Session_Exists';
+		$jsonMessage['status'] = 'Error';
+		$jsonMessage['data'] = 'Session_Exists';
         die(json_encode($jsonMessage));
     }
 
@@ -32,7 +33,9 @@
     $count = db_count(['email' => $email]);
 
     if ($count > 0) {
-        die("Email id already registered!");
+		$jsonMessage['status'] = 'Error';
+		$jsonMessage['data'] = 'Email id already registered!';
+        die(json_encode($jsonMessage));
     }
 
 	try {
@@ -89,18 +92,20 @@
 		
 		$bulk->insert($doc);
 		$mng->executeBulkWrite('testdb.cars', $bulk);
-		echo "User added successfully!";
+		$jsonMessage['status'] = 'Success';
+		$jsonMessage['data'] = 'User added successfully';
+		$session->login($email, $passwd);
+        die(json_encode($jsonMessage));
 			
 	} catch (MongoDB\Driver\Exception\Exception $e) {
 
 		$filename = basename(__FILE__);
 		
-		echo "The $filename script has experienced an error.\n"; 
-		echo "It failed with the following exception:\n";
-		
-		echo "Exception:", $e->getMessage(), "\n";
-		echo "In file:", $e->getFile(), "\n";
-		echo "On line:", $e->getLine(), "\n";    
+		$errorTxt =  "The " . $filename . "script has experienced an error.\n" . "It failed with the following exception:\n" . "Exception:" . $e->getMessage() . "\n" . "In file:" . $e->getFile() . "\n" . "On line:" . $e->getLine() . "\n";    
+
+		$jsonMessage['status'] = 'Error';
+		$jsonMessage['data'] = $errorTxt;
+        die(json_encode($jsonMessage));
 	}
 
 ?>
