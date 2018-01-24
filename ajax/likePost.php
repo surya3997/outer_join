@@ -7,7 +7,7 @@
     $jsonMessage = array();
 
     if (!$session->isLoggedIn()) {
-        $jsonMessage['status'] = 'Illegal_entry';
+        $jsonMessage = 'Illegal_entry';
         die(json_encode($jsonMessage));
     }
 
@@ -35,6 +35,6 @@
     }
 
     
-    echo "Updated successfully";
+    echo "Updated";
 
 ?>

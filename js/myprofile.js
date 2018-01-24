@@ -3,7 +3,7 @@ function myFunction(x) {
     console.log(x.id);
     var name = x.id.split("_");
     console.log(name);
-    var request = { 'updateId': name[0], 'postIndex': name[1]};
+    var request = { 'updateId': name[0], 'postIndex': name[1] };
     $.post("./ajax/likePost.php", request, function (response) {
         if (response != 'Updated') {
             alert('like not posted');
@@ -12,12 +12,15 @@ function myFunction(x) {
 
 }
 
+// var myData = [];
+
 $(document).ready(function () {
     append_prefix = '<li><a href="#">';
     append_suffix = '</a></li>';
 
     $.post("./ajax/getMyInfo.php", {}, function (response) {
-        jsondata = JSON.parse(response);
+        var jsondata = JSON.parse(response);
+        //myData = jsondata;
         if (jsondata["status"] != 'Error') {
             var name = jsondata['name'];
             var email = jsondata['email'];
@@ -152,70 +155,77 @@ function toNormalTime(epoch) {
 }
 
 function insertPost() {
-    $.post("./ajax/getFrndsPost.php", {}, function (response) {
-        // console.log(response);
-        jsondata = JSON.parse(response);
+
+    
+    $.post("./ajax/getMyInfo.php", {}, function (response) {
+        var myData = JSON.parse(response);
+        // myData = jsondata;
+        console.log(myData);
+        // });
+
+
+        var jsondata = myData['user_post'];
         if (jsondata.length != 0) {
             var data_length = jsondata.length;
             var flag = 0;
 
             var ultimate = '';
 
-            for (var i = 0; i < data_length; i++) {
-                var subdata = jsondata[i]['user_post'];
-                if (subdata.length != 0) {
-                    //console.log(jsondata[i]['user_post']);
-                    var s1 = '<div class="panel panel-default"><div class="panel-body">';
-                    var s1_2 = '<div class="media"';
-                    var s2 = jsondata[i]['_id']['$oid'];
+            // for (var i = 0; i < data_length; i++) {
+            var subdata = jsondata;
+            if (subdata.length != 0) {
+                //console.log(jsondata[i]['user_post']);
+                var s1 = '<div class="panel panel-default"><div class="panel-body">';
+                var s1_2 = '<div class="media"';
+                var s2 = myData['_id']['$oid'];
 
-                    //console.log(s1, s2, s3, s4, s5);
-                    var s6 = '"><div class="media-left"><img src="';
+                //console.log(s1, s2, s3, s4, s5);
+                var s6 = '"><div class="media-left"><img src="';
 
-                    var s8 = '" class="media-object" style="width:45px"></div><div class="media-body"><h4 class="media-heading">';
-                    var s9 = jsondata[i]['name'];
-                    var s10 = '<small><i>Posted on ';
+                var s8 = '" class="media-object" style="width:45px"></div><div class="media-body"><h4 class="media-heading">';
+                var s9 = myData['name'];
+                var s10 = '<small><i>Posted on ';
 
-                    var s12 = "</small></h4><p>";
+                var s12 = "</small></h4><p>";
 
-                    var s14 = '</p>';
-                    var like = '<i onclick="myFunction(this)" class="fa fa-thumbs-o-up btn btn-primary" id=';
-                    var like1 = '> Like</i>';
-                    var comment_post = '<div class="form-group"><label for="comment">Comment:</label><textarea class="form-control" rows="4" id="comment_';
-                    var comment_1_1 = '"></textarea><br><button type="button" onclick="comment_post(this);" class="btn btn-primary" id="';
-                    var comment_1 = '">Post</button></div>';
-                    var s15 = '</div></div></div></div>';
-                    for (var j = 0; j < subdata.length; j++) {
-                        var s3 = j.toString();
-                        var s7 = './images/skeleton_logo.png';
-                        var s11 = toNormalTime(subdata[j]['post_time']);
-                        var s13 = subdata[j]['post_txt'];
+                var s14 = '</p>';
+                var like = '<i onclick="myFunction(this)" class="fa fa-thumbs-o-up btn btn-primary" id=';
+                var like1 = '> Like</i>';
+                var comment_post = '<div class="form-group"><label for="comment">Comment:</label><textarea class="form-control" rows="4" id="comment_';
+                var comment_1_1 = '"></textarea><br><button type="button" onclick="comment_post(this);" class="btn btn-primary" id="';
+                var comment_1 = '">Post</button></div>';
+                var s15 = '</div></div></div></div>';
+                for (var j = 0; j < subdata.length; j++) {
+                    var s3 = j.toString();
+                    var s7 = './images/skeleton_logo.png';
+                    var s11 = toNormalTime(subdata[j]['post_time']);
+                    var s13 = subdata[j]['post_txt'];
 
-                        ultimate += (s1 + s1_2 + s6 + s7 + s8 + s9 + ' ' +
-                            s10 + s11 + s12 + s13 + s14 + like + s2 + '_' + s3 + like1);
+                    ultimate += (s1 + s1_2 + s6 + s7 + s8 + s9 + ' ' +
+                        s10 + s11 + s12 + s13 + s14 + like + s2 + '_' + s3 + like1);
 
-                        //console.log('Post ' + subdata[j]['post_txt']);
-                        if (subdata[j]['comments'].length != 0) {
-                            for (var k = 0; k < subdata[j]['comments'].length; k++) {
-                                //console.log('comment ' + subdata[j]['comments'][k]['comment_txt']);
-                                var s4 = subdata[j]['comments'][k]['commenter'];
-                                var s11 = toNormalTime(subdata[j]['comments'][k]['time']);
-                                var s5 = k.toString();
+                    //console.log('Post ' + subdata[j]['post_txt']);
+                    if (subdata[j]['comments'].length != 0) {
+                        for (var k = 0; k < subdata[j]['comments'].length; k++) {
+                            //console.log('comment ' + subdata[j]['comments'][k]['comment_txt']);
+                            var s4 = subdata[j]['comments'][k]['commenter'];
+                            var s11 = toNormalTime(subdata[j]['comments'][k]['time']);
+                            var s5 = k.toString();
 
-                                ultimate += (s1_2 + s2 + '_' + s3 + '_' + s5 + s6 + s7 + s8 + s9 + ' ' +
-                                    s10 + s11 + s12 + subdata[j]['comments'][k]['comment_txt'] + s14 + '</div></div>');
+                            ultimate += (s1_2 + s2 + '_' + s3 + '_' + s5 + s6 + s7 + s8 + s9 + ' ' +
+                                s10 + s11 + s12 + subdata[j]['comments'][k]['comment_txt'] + s14 + '</div></div>');
 
-                            }
                         }
-
-                        ultimate += (comment_post + s2 + '_' + s3 + '_comment' + comment_1_1 + s2 + '_' + s3 + '_comment' + comment_1 + s15);
                     }
-                    $("#append_post_div").append(ultimate);
 
+                    ultimate += (comment_post + s2 + '_' + s3 + '_comment' + comment_1_1 + s2 + '_' + s3 + '_comment' + comment_1 + s15);
                 }
+                $("#append_post_div").append(ultimate);
+
             }
+            // }
         } else {
-            alert(jsondata["data"]);
+            //alert(jsondata["data"]);
         }
     });
 }

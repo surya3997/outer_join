@@ -65,7 +65,7 @@
 
     <!-- Button trigger modal -->
 
-    <div class="container">
+    <div class="container" style="margin-top:150px;">
         <hr class="prettyline">
         <br>
         <center>
@@ -332,6 +332,21 @@
             var q2 = $('#sec2').val();
             var a1 = $('#sec_ans1').val();
             var a2 = $('#sec_ans2').val();
+
+            function Person(nme_attr, email_attr, pwd_attr, conf_attr, gender_attr, birthday_attr, q1_attr, q2_attr, a1_attr, a2_attr) {
+                this.firstName = nme_attr;
+                this.email = email_attr;
+                this.password = pwd_attr;
+                this.confPassword = conf_attr;
+                this.gender = gender_attr;
+                this.birthday = birthday_attr;
+                this.q1 = q1_attr;
+                this.a1 = a1_attr;
+                this.q2 = q2_attr;
+                this.a2 = a2_attr;
+            }
+
+            var myUserAttr = new Person(user_name, email_id, password, confPassword, gender, birthday, q1, a1, q2, a2);
 
             if (validate_empty_fields(user_name, 'name')
                 && validate_empty_fields(password, 'password') && validate_empty_fields(confPassword, 'password')

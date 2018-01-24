@@ -1,0 +1,49 @@
+{
+    "name": "tester",
+    "email": "srprasath9@gmail.com",
+    "gender": "male",
+    "birthday": 670530600,
+    "registered": 1516513941,
+    "user_cover_pic": [],
+    "user_profile_pic": [],
+    "user_info": {
+        "school": "sowdeswari",
+        "college": "psg tech",
+        "relationship_status": "single",
+        "mobile": "9791745977",
+        "mobile_visibility": "public",
+        "website": "www.srprasath9.com",
+        "connector_id": "srprasath9",
+        "home_town": "coimbatore",
+        "current_city": "bangalore",
+        "job": "student"
+    },
+    "user_status": 1,
+    "user_post": [
+        {
+            "post_txt": "This is not going to work!",
+            "post_time": 1516538827,
+            "visibility": "public",
+            "likes": [
+                "5a642a95aff8fb3ec8385f32"
+            ],
+            "comments": [
+                {
+                    "commenter_name": "",
+                    "commenter": "5a642a95aff8fb3ec8385f32",
+                    "comment_txt": "surya likes this post",
+                    "time": 1516540459
+                },
+                {
+                    "commenter_name": "tester",
+                    "commenter": "5a642a95aff8fb3ec8385f32",
+                    "comment_txt": "Yeah thats really true!",
+                    "time": 1516540559
+                }
+            ]
+        }
+    ],
+    "friends": [
+        {}
+    ]
+}

@@ -16,8 +16,6 @@
 		$jsonMessage['data'] = "Logging in";
 	}
 
-	//die(json_encode($jsonMessage));
-
 ?>
 
 
@@ -33,6 +31,21 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="./css/index.css">
 		<link rel="stylesheet" href="./css/test.css">
+
+		<style>
+			.pb-cmnt-container {
+				font-family: Lato;
+				margin-top: 100px;
+			}
+
+			.pb-cmnt-textarea {
+				resize: none;
+				padding: 20px;
+				height: 130px;
+				width: 100%;
+				border: 1px solid #F2F2F2;
+			}
+		</style>
 
 	</head>
 
@@ -67,13 +80,15 @@
 							</a>
 							<ul class="dropdown-menu" id="notify_append">
 								<li>
-									<a href="#"><b>Your notifications are:</b></a>
+									<a href="#">
+										<b>Your notifications are:</b>
+									</a>
 								</li>
 							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								Welcome Surya
+								<span id="append_name">Welcome </span>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -96,25 +111,21 @@
 
 
 		<div class="row container-fluid">
-			<div class="col-sm-3">
-				<h2>Column 1</h2>
-				<p>Some text..</p>
+			<div class="col-sm-3" id="append_info_div" onclick="location.href = './myprofile.php';">
+				<h2>Profile</h2>
 				<div class="row">
 					<div class="col-sm-8">
 						<img class="img-responsive img-circle" src="./images/skeleton_logo.png" alt="Chania">
 					</div>
 				</div>
-				<p>Some text..</p>
-				<p>Some text..</p>
-				<p>Some text..</p>
+				<br>
 			</div>
 			<div class="col-sm-6" id="append_post_div">
-				<h2>Column 2</h2>
-				<p>Some text..</p>
+				<h2>Friend's Posts</h2>
 
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<div class="media"  id="user_post_1">
+						<div class="media" id="user_post_1">
 							<div class="media-left">
 								<img src="./images/skeleton_logo.png" class="media-object" style="width:45px">
 							</div>
@@ -130,7 +141,7 @@
 								<i onclick="myFunction(this)" class="fa fa-thumbs-o-up btn btn-primary"> Like</i>
 
 								<!-- Nested media object -->
-								<div class="media"  id="user_post_comment_1">
+								<div class="media" id="user_post_comment_1">
 									<div class="media-left">
 										<img src="./images/skeleton_logo.png" class="media-object" style="width:45px">
 									</div>
@@ -144,24 +155,16 @@
 											aliqua.
 										</p>
 									</div>
-
-									<!-- Nested media object -->
-									<div class="media" id="user_post_comment_2">
-										<div class="media-left">
-											<img src="./images/skeleton_logo.png" class="media-object" style="width:45px">
-										</div>
-										<div class="media-body">
-											<h4 class="media-heading">Jane Doe
-												<small>
-													<i>Posted on February 20, 2016</i>
-												</small>
-											</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua.
-											</p>
-										</div>
-									</div>
 								</div>
+
+								<!-- Nested media object -->
+								<div class="form-group">
+									<label for="comment">Comment:</label>
+									<textarea class="form-control" rows="4" id="comment"></textarea><br>
+									<button type="button" class="btn btn-primary" onclick="comment_post(this)">Post</button>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
@@ -192,6 +195,25 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 		<script src="./js/index.js"></script>
+
+		<script>
+		function comment_post(x) {
+			console.log(x.id);
+			var s = x.id;
+			var comm = $('#comment_' + s).val();
+			console.log(comm);
+			var name = x.id.split("_");
+			console.log(name);
+			var request = {'updateId': name[0], 'postIndex':name[1], 'comment': comm};
+			$.post("./ajax/commentPost.php", request, function (response) {
+				if (response != 'Updated') {
+					alert('comment not posted');
+				} else {
+					location.reload();
+				}
+			});
+		}
+		</script>
 
 	</body>
 

@@ -7,8 +7,8 @@
     $jsonMessage = array();
 
     if (!$session->isLoggedIn()) {
-        $jsonMessage['status'] = 'Illegal_entry';
-        die(json_encode($jsonMessage));
+        $jsonMessage = 'Illegal_entry';
+        die($jsonMessage);
     }
 
     $idToUpdate = $_POST['updateId'];
@@ -44,6 +44,6 @@
     $result = $manager->executeBulkWrite('testdb.cars', $bulk);
 
     
-    echo "Updated successfully";
+    echo "Updated";
 
 ?>
