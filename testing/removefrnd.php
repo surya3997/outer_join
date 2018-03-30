@@ -8,14 +8,14 @@ $mongo_id = new MongoDB\BSON\ObjectID('5a642a95aff8fb3ec8385f32');
             ['_id' => $mongo_id],
             ['$pull' => ['friends' => NULL]]
         );
-        $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+        $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
         $bulk = new MongoDB\Driver\BulkWrite;
         $bulk->update(
             ['_id' => $mongo_send_id],
             ['$pull' => ['friends' => NULL]]
         );
-        $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+        $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     echo "updation done";
 

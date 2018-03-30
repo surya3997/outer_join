@@ -29,7 +29,7 @@
         ['$unset' => ['friends.$' => ""]],
         ['multi' => true, 'upsert' => false]
     );
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->update(
@@ -37,21 +37,21 @@
         ['$unset' => ['friends.$' => ""]],
         ['multi' => true, 'upsert' => false]
     );
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->update(
         ['_id' => $mongo_id],
         ['$pull' => ['friends' => NULL]]
     );
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     $bulk = new MongoDB\Driver\BulkWrite;
     $bulk->update(
         ['_id' => $mongo_accept_id],
         ['$pull' => ['friends' => NULL]]
     );
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
     
     echo "updation done";
 

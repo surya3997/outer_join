@@ -13,7 +13,7 @@ try {
     $bulk->update(['_id' => new \MongoDB\BSON\ObjectID($id)], ['$set' => ['secret_quote.answer_1' => 'jerry']]);
     //$bulk->delete(['name' => 'Toyota']);
     
-    $mng->executeBulkWrite('testdb.cars', $bulk);
+    $mng->executeBulkWrite('outerJoin.USERS', $bulk);
         
 } catch (MongoDB\Driver\Exception\Exception $e) {
 

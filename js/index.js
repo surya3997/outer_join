@@ -12,6 +12,11 @@ function myFunction(x) {
 
 }
 
+function searchUser() {
+    var userEmail = $('#search-box').val();
+    
+}
+
 $(document).ready(function () {
     append_prefix = '<li><a href="#">';
     append_suffix = '</a></li>';

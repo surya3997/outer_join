@@ -7,7 +7,7 @@ function db_query($findArray, $option) {
         $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
         $query = new MongoDB\Driver\Query($findArray, $option); 
          
-        $rows = $mng->executeQuery("testdb.cars", $query);
+        $rows = $mng->executeQuery("outerJoin.USERS", $query);
                 
         return $rows;
 
@@ -26,9 +26,9 @@ function db_query($findArray, $option) {
 function db_count($query) {
     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-	$command = new MongoDB\Driver\Command(["count" => "cars", "query" => $query]);
+	$command = new MongoDB\Driver\Command(["count" => "USERS", "query" => $query]);
 	try {
-	    $result = $mng->executeCommand("testdb", $command);
+	    $result = $mng->executeCommand("outerJoin", $command);
 	    $res = current($result->toArray());
 	    $count = $res->n;
 	    return $count;
@@ -89,7 +89,7 @@ class Session {
                     );
 
                     $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
-                    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+                    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
                     //die(json_encode($printer[0]));
                     $response = ['status' => 'Success', 'data' => 'Loggin in'];
@@ -118,7 +118,7 @@ class Session {
         );
 
         $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
-        $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+        $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
         $_SESSION['id'] = '';
         $this->userId = NULL;

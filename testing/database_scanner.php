@@ -9,7 +9,7 @@ $mongo_id = new MongoDB\BSON\ObjectID('5a642a95aff8fb3ec8385f32');
 $query = ['_id' => $mongo_id]; // your typical MongoDB query
 $cmd = new MongoDB\Driver\Command([
     // build the 'distinct' command
-    'collection' => 'cars', // specify the collection name
+    'collection' => 'USERS', // specify the collection name
     //'key' => 'notification', // specify the field for which we want to get the distinct values
     'query' => $query // criteria to filter documents
 ]);

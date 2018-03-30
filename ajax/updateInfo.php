@@ -44,7 +44,7 @@
     );
 
     $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
     echo "Updated successfully";
 
 ?>

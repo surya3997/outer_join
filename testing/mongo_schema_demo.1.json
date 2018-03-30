@@ -24,8 +24,8 @@
         "current_city": "cbe",
         "Job": "None"
     },
-    "user_cover_pic": ["pic1.jpg", "pic2.jpg", "pic3.jpg"],
-    "user_profile_pic": ["ppic1.jpg", "ppic2.jpg", "ppic3.jpg"],
+    "user_cover_pic": "pic1.jpg",
+    "user_profile_pic": "ppic1.jpg",
     "notification": [{
         "notify_txt": "You have signed in",
         "notify_time": "2017-10-03T16:30:00",

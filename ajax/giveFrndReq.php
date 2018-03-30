@@ -29,7 +29,7 @@
         ['_id' => $mongo_id],
         ['$push' => ['friends' => $ins]]
     );
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     // Update on the requesters account    
     $bulk = new MongoDB\Driver\BulkWrite;
@@ -39,7 +39,7 @@
         ['$push' => ['friends' => $ins]]
     );
     //$manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     // Notify the requested user to respond
     $mongo_date = new DateTime();
@@ -58,7 +58,7 @@
         ['$push' => ['notification' => $ins]]
     );
     //$manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
-    $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+    $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
 
     echo "Updated successfully";
 

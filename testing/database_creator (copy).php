@@ -12,7 +12,7 @@ try {
     //$bulk->update(['name' => 'Benz'], ['$set' => ['price' => 52000]]);
     $bulk->delete(['name' => 'Toyota']);
     
-    $mng->executeBulkWrite('testdb.cars', $bulk);
+    $mng->executeBulkWrite('outerJoin.USERS', $bulk);
         
 } catch (MongoDB\Driver\Exception\Exception $e) {
 

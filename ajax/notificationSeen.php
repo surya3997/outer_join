@@ -26,7 +26,7 @@
             ['$set' => ['notification.$.seen' => 1]],
             ['multi' => true, 'upsert' => false]
         );
-        $result = $manager->executeBulkWrite('testdb.cars', $bulk);
+        $result = $manager->executeBulkWrite('outerJoin.USERS', $bulk);
         $count = db_count(['_id' => $mongo_id, 'notification.seen' => 0]);
     }
     echo $mongo_id;

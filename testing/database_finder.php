@@ -8,7 +8,7 @@ try {
 
     $query = new MongoDB\Driver\Query(["_id" => $mongo_id]); 
      
-    $rows = $mng->executeQuery("testdb.cars", $query);
+    $rows = $mng->executeQuery("outerJoin.USERS", $query);
     $printer = array();
     foreach ($rows as $row) {
     	var_dump($row);

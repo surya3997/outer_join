@@ -110,7 +110,17 @@
 			<div class="col-sm-6" id="append_post_div">
 				<h2>Your Posts</h2>
 
-				
+				<div class="form-group">
+					<label for="comment">What do you feel :</label>
+					<textarea class="form-control" rows="5" id="post_message"></textarea><br>
+					<div class="form-group col-xs-3">
+						<select class="form-control" id="visibility_selector">
+						  <option>Public</option>
+						  <option>Friends</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="postStatus();">Publish Post</button><br>
+				</div>
 
 
 			</div>
@@ -139,22 +149,37 @@
 		<script src="./js/myprofile.js"></script>
 
 		<script>
-		function comment_post(x) {
-			console.log(x.id);
-			var s = x.id;
-			var comm = $('#comment_' + s).val();
-			console.log(comm);
-			var name = x.id.split("_");
-			console.log(name);
-			var request = {'updateId': name[0], 'postIndex':name[1], 'comment': comm};
-			$.post("./ajax/commentPost.php", request, function (response) {
-				if (response != 'Updated') {
-					alert('comment not posted');
-				} else {
-					location.reload();
-				}
-			});
-		}
+			function comment_post(x) {
+				console.log(x.id);
+				var s = x.id;
+				var comm = $('#comment_' + s).val();
+				console.log(comm);
+				var name = x.id.split("_");
+				console.log(name);
+				var request = { 'updateId': name[0], 'postIndex': name[1], 'comment': comm };
+				$.post("./ajax/commentPost.php", request, function (response) {
+					if (response != 'Updated') {
+						alert('comment not posted');
+					} else {
+						location.reload();
+					}
+				});
+			}
+		</script>
+
+		<script>
+			function postStatus() {
+				var post_txt = $('#post_message').val();
+				var visibility = $('#visibility_selector').find(":selected").text();
+				var request = {'post_txt' : post_txt, 'visibility': visibility};
+				$.post("./ajax/insertPost.php", request, function (response) {
+					if (response != 'Updated') {
+						alert('comment not posted');
+					} else {
+						location.reload();
+					}
+				});
+			}
 		</script>
 
 	</body>

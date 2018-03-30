@@ -91,7 +91,7 @@
 				];
 		
 		$bulk->insert($doc);
-		$mng->executeBulkWrite('testdb.cars', $bulk);
+		$mng->executeBulkWrite('outerJoin.USERS', $bulk);
 		$jsonMessage['status'] = 'Success';
 		$jsonMessage['data'] = 'User added successfully';
 		$session->login($email, $passwd);

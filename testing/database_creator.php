@@ -110,7 +110,7 @@ try {
 			];
     
 	$bulk->insert($doc);
-    $mng->executeBulkWrite('testdb.cars', $bulk);
+    $mng->executeBulkWrite('outerJoin.USERS', $bulk);
         
 } catch (MongoDB\Driver\Exception\Exception $e) {
 
